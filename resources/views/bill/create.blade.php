@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout_admin')
 @section('content')
 <div class="row">
 	<section class="content">
@@ -58,6 +58,38 @@
 										<input type="text" name="sales_id" id="sales_id" class="form-control input-sm" placeholder="Sale">
 									</div>
 								</div>
+								<div class="row">
+									<div class="col-xs-6 col-sm-6 col-md-6">
+										<div>
+											<button onclick="findMe()">Obtener ubicacion de envio</button>
+	<div id="map"></div>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNc47ZlQuFWO-fnuSJ1jbmeZ3E0as5nS8"></script>
+	<script>
+		function findMe(){
+			var output = document.getElementById('map');
+			// Verificar si soporta geolocalizacion
+			if (navigator.geolocation) {
+				output.innerHTML = "<p>Tu navegador soporta Geolocalizacion</p>";
+			}else{
+				output.innerHTML = "<p>Tu navegador no soporta Geolocalizacion</p>";
+			}
+			//Obtenemos latitud y longitud
+			function localizacion(posicion){
+
+				var latitude = posicion.coords.latitude;
+				var longitude = posicion.coords.longitude;
+				var imgURL = "https://maps.googleapis.com/maps/api/staticmap?center="+latitude+","+longitude+"&size=600x300&markers=color:red%7C"+latitude+","+longitude+"&key=YOUR_API_KEY";
+				output.innerHTML ="<img src='"+imgURL+"'>";
+			}
+
+			function error(){
+				output.innerHTML = "<p>No se pudo obtener tu ubicación</p>";
+			}
+			navigator.geolocation.getCurrentPosition(localizacion,error);
+		}
+	</script>
+										</div>
+									</div>
 						
 							<div class="row">
  
@@ -75,3 +107,5 @@
 		</div>
 	</section>
 	@endsection
+
+	

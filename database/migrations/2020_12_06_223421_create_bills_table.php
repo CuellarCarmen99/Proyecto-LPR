@@ -18,10 +18,6 @@ class CreateBillsTable extends Migration
             $table->id();
             $table->dateTime('date');
             $table->decimal('amount');
-            $table->unsignedBigInteger('clients_id');            
-            $table->foreign('clients_id')->references('id')->on('individuals');
-            $table->unsignedBigInteger('employee_id');            
-            $table->foreign('employee_id')->references('id')->on('individuals');
             $table->unsignedBigInteger('sales_id');            
             $table->foreign('sales_id')->references('id')->on('sales');
 

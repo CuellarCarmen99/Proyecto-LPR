@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout_admin')
 @section('content')
 <div class="row">
 	<section class="content">
@@ -33,6 +33,7 @@
 										<input type="text" name="name" id="name" class="form-control input-sm" placeholder="Product name">
 									</div>
 								</div>
+								
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
 										<input type="text" name="price" id="price" class="form-control input-sm" placeholder="Price of the product">
@@ -51,8 +52,10 @@
 									</div>
 								</div>
 							</div>
-							
+
+													
 							<div class="row">
+								
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									
 									<select name="categories_id" id="categories_id" class="form-group">
@@ -74,6 +77,7 @@
 									</div>
 								</div>
 							</div>
+							
 						
 							<div class="row">
  

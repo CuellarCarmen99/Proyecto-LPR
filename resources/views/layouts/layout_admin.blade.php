@@ -33,9 +33,22 @@
 						@endif
 					@else
 			
-			<li><a href="#">Page 2</a></li>
-			<li><a href="#">Page 3</a></li>
-
+			<li><a href="{{ route('product.index') }}" 	>
+                products
+            </a></li>
+			<li><a href="{{ route('provider.index') }}" 	>
+                providers
+			</a></li>
+			<li><a href="{{ route('category.index') }}" 	>
+                categories
+			</a></li>
+			<li><a href="{{ route('sale.index') }}" 	>
+                sales
+			</a></li>
+			<li><a href="{{ route('bill.index') }}" 	>
+                bills
+			</a></li>
+			
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->name }}
 				<span class="caret"></span></a>
@@ -49,8 +62,8 @@
 			  
 				</ul>
 			  </li>
-			  
 		  </ul>
+		  
 		</div>
 	  </nav>
 				<ul class="navbar-nav ml-auto">

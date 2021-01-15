@@ -12,8 +12,9 @@ class ProviderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $providers=provider::orderBy('id','DESC')->paginate(3);
         return view('provider.index',compact('providers'));
     }
@@ -23,8 +24,9 @@ class ProviderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         return view('provider.create');
     }
 
@@ -58,8 +60,9 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $provider=provider::find($id);
         return view('provider.edit',compact('provider'));
     }

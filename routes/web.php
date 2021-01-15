@@ -12,23 +12,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+
+    return view('welcome');
+
+});
 
 
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/config', 'UserController@config')->name('config');
+Route::get('/store', 'ProductController@show')->name('store');
 Route::resource('product', 'ProductController');
 Route::resource('sale', 'SaleController');
-Route::resource('rol', 'RolController');
 Route::resource('provider', 'ProviderController');
-
 Route::resource('category', 'CategoryController');
-Route::resource('individual', 'IndividualController');
 Route::resource('bill', 'BillController');
-Route::resource('/message', 'MessagesController');
-Route::view('/email', 'emails.test');
 
-
+Route::get('correo', 'MailController@getMail');
 

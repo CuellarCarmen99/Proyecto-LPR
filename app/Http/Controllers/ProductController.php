@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\product;
 use App\category;
 use App\provider;
@@ -14,8 +15,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $categories=category::orderBy('id','DESC')->paginate(3);;
         $providers=provider::orderBy('id','DESC')->paginate(3);;
         $products=product::orderBy('id','DESC')->paginate(3);
@@ -27,8 +29,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $categories=category::get();
         $providers=provider::get();
         return view('product.create', compact('categories','providers'));
@@ -43,6 +46,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request,[ 'name'=>'required', 'price'=>'required', 'expiration'=>'required', 'existence'=>'required', 'categories_id'=>'required', 'providers_id'=>'required']);
         Product::create($request->all());
         return redirect()->route('product.index')->with('success','Record created successfully');
@@ -54,9 +58,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-       
+      
+        $categories=category::orderBy('id','DESC')->paginate(3);;
+        $providers=provider::orderBy('id','DESC')->paginate(3);;
+        $products=product::orderBy('id','DESC')->paginate(3);
+        return view('product.show',compact('products','categories', 'providers'));
     }
 
     /**
@@ -65,8 +73,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $product=product::find($id);
         return view('product.edit',compact('product'));
     }

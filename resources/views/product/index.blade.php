@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout_admin')
 @section('content')
 <div class="row">
   <section class="content">
@@ -10,7 +10,9 @@
             <div class="btn-group">
               <a href="{{ route('product.create') }}" class="btn btn-info" >Add product</a>
             </div>
-          </div>
+            <br><br>
+            <div><a class="btn btn-info" href="{{action('MailController@getMail')}}" >Notification</a></div>
+          <br></div>
           <div class="table-container">
             <table id="mytable" class="table table-bordred table-striped">
              <thead>
@@ -64,7 +66,7 @@
           </table>
         </div>
       </div>
-      {{ $products->links() }}
+      {{ $products ?? ''->links() }}
     </div>
   </div>
 </section>

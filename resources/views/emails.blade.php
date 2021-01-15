@@ -1,0 +1,1 @@
+<h1>Hola {{ $name }}, tenemos nuevos productos en nuestro catalogo</h1>

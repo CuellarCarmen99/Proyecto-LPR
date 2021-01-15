@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Role;
+use App\Users;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -26,8 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
+   
     /**
      * Create a new controller instance.
      *
@@ -37,4 +38,24 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+   /* public function authenticated($request , $user){
+
+        if($user->role=='user'){
+            return redirect()->route('product.show') ;
+        }else{
+            return redirect()->route('product.index') ;
+        }
+    
+    
+    
+}*/
+
+/*public function redirectPath(){
+    if(auth()->users()->email == 'carmenvc1999cuellar@gmail.com'){
+        return redirect()->route('product.index') ;
+    }
+    return redirect()->route('product.show') ;
+}*/
 }

@@ -14,8 +14,9 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $products=product::orderBy('id','DESC')->paginate(3);
         $providers=provider::orderBy('id','DESC')->paginate(3);;
         $sales=sale::orderBy('id','DESC')->paginate(3);
@@ -27,8 +28,9 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $products=product::get();
         $providers=provider::get();
         return view('sale.create', compact('products','providers'));
@@ -64,8 +66,9 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $sale=sale::find($id);
         return view('sale.edit',compact('sale'));
     }
@@ -79,7 +82,7 @@ class SaleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[ 'quantity'=>'required', 'products_id'=>'required', 'providers_id'=>'required']);
+        $this->validate($request,[ 'quantity'=>'required','longitud'=>'required','latitud'=>'required', 'products_id'=>'required', 'providers_id'=>'required']);
         sale::find($id)->update($request->all());
         return redirect()->route('sale.index')->with('success','Record successfully updated');
     }

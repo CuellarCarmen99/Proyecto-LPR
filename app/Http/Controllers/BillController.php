@@ -12,8 +12,9 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $bills=bill::orderBy('id','DESC')->paginate(3);
         return view('bill.index',compact('bills'));
     }
@@ -23,8 +24,9 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         return view('bill.create');
     }
 
@@ -58,8 +60,9 @@ class BillController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+        $request->user()->authorizeRoles('admin');
         $bill=bill::find($id);
         return view('bill.edit',compact('bill'));
     }

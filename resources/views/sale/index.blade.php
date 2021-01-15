@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout_admin')
 @section('content')
 <div class="row">
   <section class="content">
@@ -14,7 +14,7 @@
           <div class="table-container">
             <table id="mytable" class="table table-bordred table-striped">
              <thead>
-               <th>Quantity</th>
+               <th>Quantity</th>         
                <th>Product</th>
                <th>Provider</th>
              </thead>
@@ -23,6 +23,7 @@
               @foreach($sales as $sale)  
               <tr>
                 <td>{{$sale->quantity}}</td>
+                
 
                 @foreach($products as $product)
                     @if($sale->products_id == $product->id)
